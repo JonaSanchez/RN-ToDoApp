@@ -14,7 +14,6 @@ const Home = ({ navigation }) => {
       <Text style={styles.title}>Welcome!</Text>
       <Button
         title="Go to profile"
-        style={styles.button}
         onPress={() =>
           navigation.navigate('Profile', { name: 'Jona' })
         }

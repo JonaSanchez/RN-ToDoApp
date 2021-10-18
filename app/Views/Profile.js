@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  View,
 } from 'react-native';
 
 
@@ -13,7 +13,7 @@ const Profile = ({ navigation, route }) => {
   const [description, setDescription] = React.useState('')
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
       <Image source={{ uri: 'https://picsum.photos/410' }} style={styles.image} />
       <Text style={styles.title}>{route.params.name}</Text>
       <Text style={styles.caption}>Phone</Text>
@@ -21,7 +21,7 @@ const Profile = ({ navigation, route }) => {
         style={styles.input}
         onChangeText={setPhone}
         value={phone}
-        placeholder="Phone Number"
+        placeholder="Phone number"
         keyboardType="numeric"
       />
       <Text style={styles.caption}>Description</Text>
@@ -31,17 +31,11 @@ const Profile = ({ navigation, route }) => {
         value={description}
         placeholder="Something about you"
       />
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
   title: {
     fontSize: 32,
     fontWeight: '700',
