@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ListItem from '../components/ListItem';
-import { addNote, removeNote } from '../store/noteSlice';
+import { removeNote } from '../store/noteSlice';
 
 
 /**
@@ -23,20 +23,12 @@ const Home = ({ navigation }) => {
   const { notes } = useSelector(state => state.notes)
   const dispatch = useDispatch()
 
-  const addNewNote = () => {
-    const newNoteId = !!notes.length
-      ? notes[notes.length - 1].id + 1
-      : 1
-    const newNote = {
-      id: newNoteId,
-      title: `Note No. ${newNoteId}`,
-      text: 'Hi there!'
-    }
-    dispatch(addNote(newNote))
-  }
-
   const deleteNote = (noteId) => {
     dispatch(removeNote(noteId))
+  }
+
+  const goToNoteDetails = (note) => {
+    navigation.navigate('Details', { note: note })
   }
 
   return (
@@ -51,12 +43,18 @@ const Home = ({ navigation }) => {
       <Image source={{ uri: 'https://picsum.photos/200' }} style={styles.image} />
       <Button
         title="Add Note"
-        onPress={addNewNote}
+        onPress={() =>
+          navigation.navigate('Details')
+        }
       />
       <View style={styles.listContainer}>
         <FlatList
           data={notes}
-          renderItem={({ item }) => <ListItem note={item} onDelete={deleteNote} />}
+          renderItem={({ item }) => <ListItem
+            note={item}
+            onNoteSelect={goToNoteDetails}
+            onDelete={deleteNote}
+          />}
         />
       </View>
     </View>

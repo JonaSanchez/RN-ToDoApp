@@ -3,20 +3,23 @@ import {
   Button,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
 
-const ListItem = ({ note, onDelete }) => {
+const ListItem = ({ note, onDelete, onNoteSelect }) => {
 
   return (
-    <View style={styles.item}>
-      <Text style={styles.itemText}>{note.title}</Text>
-      <Button
-        title="Delete"
-        color="#cf361e"
-        onPress={() => onDelete(note.id)}
-      />
-    </View>
+    <TouchableHighlight onPress={() => onNoteSelect(note)}>
+      <View style={styles.item}>
+        <Text style={styles.itemText}>{note.title}</Text>
+        <Button
+          title="Delete"
+          color="#cf361e"
+          onPress={() => onDelete(note.id)}
+        />
+      </View>
+    </TouchableHighlight>
   );
 };
 
